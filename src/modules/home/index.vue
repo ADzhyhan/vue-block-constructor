@@ -71,14 +71,12 @@
                 </svg>
               </div>
             </a>
+          </div> 
         </div>
-        
       </div>
-      </div>
-      
     </div>
 
-    <div class="show-more" v-if="this.perPage < this.blocks.length">
+    <div class="show-more" v-if="perPage < blocks.length">
       <button @click="showMore()">Завантажити ще</button>
     </div>
     

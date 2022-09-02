@@ -57,7 +57,7 @@ export default {
       blocks: `block/blocks`,
     }),
     collection() {
-      return this.paginate(this.blocks).reverse();
+      return this.paginate(this.blocks);
     },
 
 
