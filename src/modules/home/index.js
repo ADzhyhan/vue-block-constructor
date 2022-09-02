@@ -17,7 +17,7 @@ export default {
   data(){
     return{
       isImage: false,
-      perPage: 3,
+      perPage: 9, // number of items to display
       pagination: {},
       block: {
         title: '',
@@ -211,7 +211,7 @@ export default {
       };
     },
     showMore(){
-      this.perPage +=3
+      this.perPage += this.perPage
       this.setPage(1)
     }
 },
