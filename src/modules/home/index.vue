@@ -3,7 +3,7 @@
     <div class="home-wrapper">
       <forma></forma>
     </div>
-    <div class="content">
+    <div class="content" v-if="collection.length">
       <div class="content-wrap">
         <div class="content-block" v-for="item in collection">
           <block :block="item"></block>

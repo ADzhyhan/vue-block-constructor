@@ -12,7 +12,7 @@ export default {
   },
   data(){
     return{
-      perPage: 1, // number of items to display
+      perPage: 9, // number of items to display
       pagination: {},
     }
   },
