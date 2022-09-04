@@ -42,7 +42,6 @@ export default {
       },
       link: {
         url,
-        maxLength: maxLength(30),
         required,
       },
     },
@@ -99,19 +98,6 @@ export default {
       }
       if (this.validationErrors.link) {
         this.validationErrors.link.forEach((row) => {
-          error.push(row)
-        })
-        this.validationErrors = {}
-      }
-      return error
-    },
-    imageError() {
-      const error = []
-      if(!this.isImage && this.block.image.length) {
-        error.push('Тільки картинки')
-      }
-      if (this.validationErrors.image) {
-        this.validationErrors.image.forEach((row) => {
           error.push(row)
         })
         this.validationErrors = {}
