@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import {
   ADD_BLOCK,
-  REMOVE_BLOCK
+  REMOVE_BLOCK,
+  CHANGE_PAGE
 } from '../mutation-types';
 // import {} from '../action-types';
 
@@ -13,11 +14,12 @@ function save() {
 
 const state = {
   blocks: localStorage.getItem('blocks') ? JSON.parse(localStorage.getItem('blocks')) : [],
-
+  currPage: 1,
 };
 
 const getters = {
   blocks: state => state.blocks || [],
+  currPage: state => state.currPage,
 };
 
 const actions = {
@@ -41,6 +43,9 @@ const mutations = {
     const element = state.blocks.findIndex(e => e.title === obj.title);
     Vue.delete(state.blocks, element)
     save();
+  },
+  [CHANGE_PAGE](state, page) {
+    state.currPage = page
   },
 };
 export default {
