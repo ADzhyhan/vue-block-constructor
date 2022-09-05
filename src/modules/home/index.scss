@@ -312,6 +312,7 @@ body {
     &:disabled {
       border: 1px solid red;
       transition: .3s ease-out;
+      cursor: default;
     }
   }
 }

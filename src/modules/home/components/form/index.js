@@ -14,6 +14,11 @@ export default {
   data(){
     return{
       validationErrors: {},
+      isImage: true,
+      cyrillic: {
+        titleError: false, 
+        descrError: false,
+      },
       block: {
         title: '',
         link: '',
@@ -66,6 +71,7 @@ export default {
       }
       if (str.length && (!(ua ^ en) || !ua )) {
         error.push('Тільки кирилиця');
+        this.cyrillic.titleError = !this.cyrillic.titleError
       } 
         if (this.validationErrors.title) {
         this.validationErrors.title.forEach((row) => {
@@ -110,6 +116,7 @@ export default {
       }
       if (str.length && (!(ua ^ en) || !ua )) {
         error.push('Тільки кирилиця');
+        this.cyrillic.descrError = !this.cyrillic.descrError
       } 
       if (this.validationErrors.description) {
         this.validationErrors.description.forEach((row) => {
@@ -119,9 +126,22 @@ export default {
       }
       return error
     },
+    imageError() {
+      const error = []
+      if(!this.isImage) {
+        error.push('Будь ласка, виберіть зображення')
+      } 
+      if (this.validationErrors.image) {
+        this.validationErrors.image.forEach((row) => {
+          error.push(row)
+        })
+        this.validationErrors = {}
+      }
+      return error
+    },
   },
   watch: {
-   
+    
   },
 
   mounted() {
@@ -134,11 +154,13 @@ export default {
 
     saveBlock() {
       this.$v.$touch();
-      if (!this.$v.block.$invalid && this.isImage && !this.validationErrors.length) {
+      if (!this.$v.block.$invalid && !this.validationErrors.length && this.block.image.length && !this.cyrillic.titleError && !this.cyrillic.descrError) {
         this.addBlock(this.block)
         this.resetForm()
         this.$refs.form.reset();
         this.$v.$reset()
+      } else if(!this.block.image.length) {
+        this.isImage = false
       } else {
         this.$toasted.error('Перевірте форму')
       }
@@ -147,9 +169,7 @@ export default {
     onImg(e) {
       const file = e.target.files[0];
       const reader = new FileReader();
-      if (!file.type.match('image.*')) {
-        this.isImage = false
-      } else {
+      if(file) {
         this.isImage = true
       }
       reader.onloadend = () => {
@@ -163,6 +183,7 @@ export default {
       this.block.link = ''
       this.block.description = ''
       this.block.image = ''
+      this.isImage = true;
     },
   }
   

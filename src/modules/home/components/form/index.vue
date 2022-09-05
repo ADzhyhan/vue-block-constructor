@@ -13,7 +13,7 @@
         <label class="form__label" for="title">Заголовок</label>
         <span class="validate-error" v-for="(item, index) in titleError" :key="index">{{ item }}</span>
       </div>
-      <div class="form__input-group file">
+      <div class="form__input-group file" :class="imageError.length !== 0? 'error': 'valid'">
         <label>
           <input 
           type="file" 
@@ -26,8 +26,8 @@
           <div class="preview" v-if="this.block.image.length">
             <img :src="'data:image/png;base64,' + this.block.image"  alt="">
           </div>
-          
         </label>
+        <span class="validate-error"  v-for="(item, index) in imageError" :key="index">{{ item }}</span>
       </div>
       <div class="form__input-group" :class="linkError.length !== 0? 'error': 'valid'">
         <input 
