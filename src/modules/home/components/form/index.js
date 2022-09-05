@@ -71,7 +71,7 @@ export default {
       }
       if (str.length && (!(ua ^ en) || !ua )) {
         error.push('Тільки кирилиця');
-        this.cyrillic.titleError = !this.cyrillic.titleError
+        this.cyrillic.titleError = true
       } 
         if (this.validationErrors.title) {
         this.validationErrors.title.forEach((row) => {
@@ -116,7 +116,7 @@ export default {
       }
       if (str.length && (!(ua ^ en) || !ua )) {
         error.push('Тільки кирилиця');
-        this.cyrillic.descrError = !this.cyrillic.descrError
+        this.cyrillic.descrError = true
       } 
       if (this.validationErrors.description) {
         this.validationErrors.description.forEach((row) => {
@@ -141,7 +141,22 @@ export default {
     },
   },
   watch: {
-    
+    'block.title'(newVal) {
+      if(newVal){
+        if(!this.validationErrors.length && this.cyrillic.titleError) {
+          this.cyrillic.titleError = false
+        }
+        
+      }
+    },
+    'block.description'(newVal) {
+      if(newVal){
+        if(!this.validationErrors.length && this.cyrillic.descrError) {
+          this.cyrillic.descrError = false
+        }
+        
+      }
+    }
   },
 
   mounted() {
